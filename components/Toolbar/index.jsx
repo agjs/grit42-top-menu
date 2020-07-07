@@ -4,14 +4,23 @@ import "./style.css";
 
 const ToolbarContext = React.createContext();
 
-const CHILD_TYPES = {
+const ELEMENT_TYPES = {
   ToolbarBlockGroup: "ToolbarBlockGroup",
   ToolbarIcons: "ToolbarIcons",
   ToolbarIcon: "ToolbarIcon"
 };
 
 const Toolbar = props => {
-  return <nav className={className("grit42-toolbar")}>{props.children}</nav>;
+  const { isOpen } = useContext(ToolbarContext);
+  return (
+    <nav
+      className={className("grit42-toolbar", {
+        "grit42-toolbar--expanded": isOpen,
+      })}
+    >
+      {props.children}
+    </nav>
+  );
 };
 
 const ToolbarBlockGroup = props => {
@@ -20,7 +29,6 @@ const ToolbarBlockGroup = props => {
         return React.cloneElement(
           group,
           Object.assign({}, group.props, {
-            isOpen: props.isOpen,
             hasBorder: index !== props.children.length - 1
           })
         );
@@ -59,7 +67,7 @@ const ToolbarIcons = props => {
   const getIcons = () => {
     if (Array.isArray(props.children)) {
       const icons = props.children.filter(
-        icon => icon.type.name === CHILD_TYPES.ToolbarIcon
+        icon => icon.type.name === ELEMENT_TYPES.ToolbarIcon
       );
 
       if (!isOpen && icons.length > 3) {
@@ -76,8 +84,10 @@ const ToolbarIcons = props => {
 };
 
 export default props => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [layout, setLayout] = useState();
+
+  const toggleToolbar = () => setIsOpen(!isOpen);
 
   return (
     <ToolbarContext.Provider value={{ isOpen }}>
@@ -109,7 +119,9 @@ export default props => {
             </ToolbarIcons>
           </ToolbarBlock>
         </ToolbarBlockGroup>
-        <div className="grit42-toolbar__expander">X</div>
+        <div className="grit42-toolbar__expander" onClick={toggleToolbar}>
+          X
+        </div>
       </Toolbar>
     </ToolbarContext.Provider>
   );
