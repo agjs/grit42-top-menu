@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+.grit42-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  position: relative;
+}
+
+.grit42-toolbar__expander {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: red; 
+}
+
+.grit42-toolbar__block {
+  display: inherit;
+  justify-content: inherit;
+  padding: 10px;
+
+}
+ 
+
