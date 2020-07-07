@@ -1,12 +1,13 @@
-* {
-  box-sizing: border-box;
-}
+
 .grit42-toolbar {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
   position: relative;
+  background-color: #1d2434;
+  color: #fff;
+  font-size: 10px;
 }
+
 
 .grit42-toolbar__expander {
   position: absolute;
@@ -15,11 +16,31 @@
   background: red; 
 }
 
+
+.grit42-toolbar__block-group {
+  display: flex;
+}
+
 .grit42-toolbar__block {
   display: inherit;
   justify-content: inherit;
-  padding: 10px;
+  margin: 10px;
+}
 
+.grit42-toolbar__block--with-border {
+  border-right: 1px solid #2a2f3e;
+}
+
+.grit42-toolbar__block__icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: space-around;
+}
+
+.grit42-toolbar__block__icons__icon {
+flex: 0 0 30%
 }
  
 
